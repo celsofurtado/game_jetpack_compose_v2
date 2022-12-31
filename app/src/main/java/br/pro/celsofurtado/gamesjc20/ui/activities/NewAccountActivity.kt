@@ -3,8 +3,10 @@ package br.pro.celsofurtado.gamesjc20.ui.activities
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,14 +15,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.pro.celsofurtado.gamesjc20.R
 import br.pro.celsofurtado.gamesjc20.ui.theme.GamesJC20Theme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 class NewAccountActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +62,32 @@ fun NewAccountHeader() {
                 .fillMaxWidth()
                 .height(200.dp)
         ) {
-            // TODO -> Conteúdo do card superior
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Card(
+                    modifier = Modifier
+                        .clip(shape = CircleShape),
+                    backgroundColor = Color.Gray
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(64.dp),
+                        painter = painterResource(id = R.drawable.user),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                Image(
+                    modifier = Modifier
+                        .offset(x = 30.dp, y = (-100).dp)
+                        .clip(shape = CircleShape)
+                        .background(Color.White),
+                    painter = painterResource(id = R.drawable.ic_edit_24),
+                    contentDescription = "")
+            }
         }
         Card(
             backgroundColor = MaterialTheme.colors.onPrimary,
@@ -68,177 +98,182 @@ fun NewAccountHeader() {
                 .clip(shape = RoundedCornerShape(16.dp))
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    textAlign = TextAlign.Center,
-                    text = "DADOS DO JOGADOR",
-                    color = Color.Gray,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.fillMaxWidth()
-                )
-//                TextLabel(
-//                    label = "Nome do jogador",
-//                    modifier = Modifier
-//                        .padding(
-//                            top = 32.dp,
-//                            bottom = 8.dp
-//                        )
-//                )
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    shape = RoundedCornerShape(percent = 40),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "",
-                            tint = MaterialTheme.colors.primary
-                        )
-                    },
-                    label = {
-                        Text(text = "Nome do jogador")
+                Column() {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        text = "DADOS DO JOGADOR",
+                        color = Color.Gray,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        shape = RoundedCornerShape(percent = 40),
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "",
+                                tint = MaterialTheme.colors.primary
+                            )
+                        },
+                        label = {
+                            Text(text = "Nome do jogador")
+                        }
+                    )
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        shape = RoundedCornerShape(percent = 40),
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Email,
+                                contentDescription = "",
+                                tint = MaterialTheme.colors.primary
+                            )
+                        },
+                        label = {
+                            Text(text = "E-mail do jogador")
+                        }
+                    )
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        shape = RoundedCornerShape(percent = 40),
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Lock,
+                                contentDescription = "",
+                                tint = MaterialTheme.colors.primary
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Visibility,
+                                contentDescription = "",
+                                tint = MaterialTheme.colors.primary
+                            )
+                        },
+                        label = {
+                            Text(text = "Senha do jogador")
+                        }
+                    )
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        shape = RoundedCornerShape(percent = 40),
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = "",
+                                tint = MaterialTheme.colors.primary
+                            )
+                        },
+                        label = {
+                            Text(text = "Nascimento (dd/mm/aaaa)")
+                        }
+                    )
+                    TextLabel(
+                        label = "Sexo",
+                        modifier = Modifier
+                            .padding(
+                                top = 16.dp,
+                                bottom = 4.dp
+                            )
+                    )
+                    var isMale by remember {
+                        mutableStateOf(false)
                     }
-                )
-//                TextLabel(
-//                    label = "E-mail do jogador",
-//                    modifier = Modifier
-//                        .padding(
-//                            top = 16.dp,
-//                            bottom = 8.dp
-//                        )
-//                )
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    shape = RoundedCornerShape(percent = 40),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Email,
-                            contentDescription = "",
-                            tint = MaterialTheme.colors.primary
-                        )
-                    },
-                    label = {
-                        Text(text = "E-mail do jogador")
+                    var isFemale by remember {
+                        mutableStateOf(false)
                     }
-                )
-//                TextLabel(
-//                    label = "Senha do jogador",
-//                    modifier = Modifier
-//                        .padding(
-//                            top = 16.dp,
-//                            bottom = 8.dp
-//                        )
-//                )
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    shape = RoundedCornerShape(percent = 40),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = "",
-                            tint = MaterialTheme.colors.primary
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            imageVector = Icons.Filled.VisibilityOff,
-                            contentDescription = "",
-                            tint = MaterialTheme.colors.primary
-                        )
-                    },
-                    label = {
-                        Text(text = "Senha do jogador")
-                    }
-                )
-//                TextLabel(
-//                    label = "Data de nascimento",
-//                    modifier = Modifier
-//                        .padding(
-//                            top = 16.dp,
-//                            bottom = 8.dp
-//                        )
-//                )
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    shape = RoundedCornerShape(percent = 40),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.DateRange,
-                            contentDescription = "",
-                            tint = MaterialTheme.colors.primary
-                        )
-                    },
-                    label = {
-                        Text(text = "Nascimento (dd/mm/aaaa)")
-                    }
-                )
-                TextLabel(
-                    label = "Sexo",
-                    modifier = Modifier
-                        .padding(
-                            top = 16.dp,
-                            bottom = 4.dp
-                        )
-                )
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Switch(checked = false, onCheckedChange = {})
-                    Text(text = "Feminino")
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Switch(checked = true, onCheckedChange = {})
-                    Text(text = "Masculino")
-                }
-                TextLabel(
-                    label = "Nível do jogador",
-                    modifier = Modifier
-                        .padding(
-                            top = 16.dp,
-                            bottom = 8.dp
-                        )
-                )
-                var exibir by remember {
-                    mutableStateOf(true)
-                }
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    DropdownMenu(
-                        modifier = Modifier.fillMaxWidth().height(40.dp),
-                        expanded = exibir,
-                        onDismissRequest = { exibir = false }
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        DropdownMenuItem(
-                            onClick = { exibir = false },
+                        Switch(checked = isFemale, onCheckedChange = {
+                            isFemale = true
+                            isMale = false
+                        })
+                        Text(text = "Feminino")
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Switch(checked = isMale, onCheckedChange = {
+                            isMale = true
+                            isFemale = false
+                        })
+                        Text(text = "Masculino")
+                    }
+                    TextLabel(
+                        label = "Nível do jogador",
+                        modifier = Modifier
+                            .padding(
+                                top = 16.dp,
+                                bottom = 8.dp
+                            )
+                    )
+                    val levels = listOf("Básico", "Intermediário", "Avançado")
+                    var expanded by remember {
+                        mutableStateOf(false)
+                    }
+                    var selectedLevel by remember {
+                        mutableStateOf("Selecione uma opção")
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(shape = RoundedCornerShape(percent = 50)),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        TextButton(
+                            onClick = { expanded = true },
+                            modifier = Modifier
+                                .fillMaxWidth()
                         ) {
-                            Text(text = "Iniciante")
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                Text(
+                                    text = "$selectedLevel",
+                                    color = Color.Gray
+                                )
+                                Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "")
+                            }
                         }
-                        DropdownMenuItem(onClick = { exibir = false }) {
-                            Text(text = "Intermediário")
-                        }
-                        DropdownMenuItem(onClick = { exibir = false }) {
-                            Text(text = "Avançado")
+                        DropdownMenu(expanded = expanded, onDismissRequest = { /*TODO*/ }) {
+                            levels.forEach { level ->
+                                DropdownMenuItem(onClick = {
+                                    expanded = false
+                                    selectedLevel = level
+                                }) {
+                                    Text(text = level)
+                                }
+                            }
                         }
                     }
+                }
+                // ---------------------------
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    shape = RoundedCornerShape(percent = 40),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(text = "SALVAR")
                 }
             }
         }
@@ -250,7 +285,7 @@ fun TextLabel(label: String, modifier: Modifier) {
     Text(
         modifier = modifier,
         text = label,
-        fontSize = 12.sp,
+        fontSize = MaterialTheme.typography.subtitle1.fontSize,
         color = MaterialTheme.colors.primary
     )
 }
